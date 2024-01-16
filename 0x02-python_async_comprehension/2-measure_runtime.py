@@ -1,16 +1,21 @@
 #!/usr/bin/env python3
-'''Task 2's module.
-'''
-import asyncio
+"""Import async_comprehension from the previous file.
+
+measure_runtime should measure the total runtime and return it.
+
+Notice that the total runtime is roughly 10 seconds, explain it to yourself.
+"""
+
 import time
+import asyncio
+async_comprehension = __import__('1-async_comprehension').async_comprehension
 
 
-wait_n = __import__('1-concurrent_coroutines').wait_n
-
-
-def measure_time(n: int, max_delay: int) -> float:
-    '''Computes the average runtime of wait_n.
-    '''
+async def measure_runtime() -> float:
+    """Measure the total runtime"""
     start_time = time.time()
-    asyncio.run(wait_n(n, max_delay))
-    return (time.time() - start_time) / n
+
+    await asyncio.gather(*(async_comprehension() for i in range(4)))
+
+    end_time = time.time()
+    return end_time - start_time
