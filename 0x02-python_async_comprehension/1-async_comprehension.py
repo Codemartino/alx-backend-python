@@ -1,17 +1,12 @@
 #!/usr/bin/env python3
-'''Task 1's module.
-'''
-import asyncio
+"""Retrieve the async_generator module from the preceding assignment and proceed to create a coroutine named async_comprehension, which requires no parameters. This coroutine is designed to gather 10 random numbers through an asynchronous comprehension using async_generator. Subsequently, it should deliver the set of 10 randomly generated numbers..
+"""
+
 from typing import List
+async_generator = __import__('0-async_generator').async_generator
 
 
-wait_random = __import__('0-basic_async_syntax').wait_random
-
-
-async def wait_n(n: int, max_delay: int) -> List[float]:
-    '''Executes wait_random n times.
-    '''
-    wait_times = await asyncio.gather(
-        *tuple(map(lambda _: wait_random(max_delay), range(n)))
-    )
-    return sorted(wait_times)
+async def async_comprehension() -> List[float]:
+    """Return the 10 random numbers"""
+    results = [i async for i in async_generator()]
+    return results
